@@ -3,439 +3,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetworkNavigators | Layanan Voucher Wi-Fi Cepat</title>
-    <!-- Load Tailwind CSS -->
+    <title>NetworkNavigators - Wi-Fi Cepat & Murah</title>
+    <!-- Memuat Tailwind CSS untuk styling responsif -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Konfigurasi Tailwind untuk font dan warna kustom -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary': '#059669', // Emerald 600
-                        'secondary': '#10B981', // Emerald 500
-                        'accent': '#FCD34D', // Amber 300
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Menggunakan font Inter */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-
-        /* Padding bawah untuk memberikan ruang pada menu statis footer */
+        /* Mengatur font utama dan memastikan padding untuk navbar bawah */
         body {
-            padding-bottom: 72px; /* Tinggi menu footer + sedikit margin */
-            background-color: #f8fafc; /* Slate 50 */
+            font-family: 'Inter', sans-serif;
+            padding-bottom: 64px; /* Ruang untuk Bottom Navbar */
+            background-color: #fce4ec; /* Light Pink Background */
         }
-
-        /* Styling spesifik untuk membuat menu bar bawah tetap (static/fixed) */
-        #mobile-nav {
+        /* Styling kustom untuk Navbar statis di bawah */
+        .bottom-navbar {
             position: fixed;
             bottom: 0;
             left: 0;
-            right: 0;
-            z-index: 50;
+            width: 100%;
+            height: 64px;
+            z-index: 1000;
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
         }
-
-        /* Menyembunyikan scrollbar pada body, hanya untuk estetika */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
+        .nav-item {
+            transition: all 0.3s ease;
         }
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+        .nav-item:hover {
+            background-color: #f48fb1;
         }
     </style>
-    <!-- Lucide Icons (Untuk icon) -->
-    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="font-sans">
+<body class="antialiased">
 
-    <!-- HEADER (Logo dan Nama Website) -->
-    <header class="bg-white shadow-md sticky top-0 z-40">
-        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <!-- Logo SVG Sederhana -->
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l-5 5h10l-5-5z"/><path d="M12 22l5-5h-10l5 5z"/><path d="M7 7l-5 5l5 5"/><path d="M17 7l5 5l-5 5"/></svg>
-                <span class="text-2xl font-extrabold text-gray-800">Network<span class="text-primary">Navigators</span></span>
+    <!-- HEADER: Logo dan Nama Website -->
+    <header class="bg-pink-600 p-4 shadow-lg sticky top-0 z-50">
+        <div class="flex items-center justify-between max-w-xl mx-auto">
+            <div class="flex items-center space-x-3">
+                <!-- Logo: Simbol Sinyal/Koneksi (Menggunakan SVG tersemat) -->
+                <div class="w-8 h-8 flex-shrink-0">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Central dot/router (filled white) -->
+                        <circle cx="12" cy="18" r="1.5" fill="white"/>
+                        <!-- Inner Arc (Wi-Fi wave) -->
+                        <path d="M9 15.5C9.75 14.75 11 14.5 12 14.5C13 14.5 14.25 14.75 15 15.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                        <!-- Outer Arc (Wi-Fi wave) -->
+                        <path d="M6 12C7 10 10 9 12 9C14 9 17 10 18 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-extrabold text-white">NetworkNavigators</h1>
             </div>
-            <!-- Tombol CMS (Hanya terlihat di Desktop) -->
-            <button onclick="toggleCmsModal()" class="hidden sm:inline-flex items-center px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-secondary transition duration-150 shadow-md">
-                <i data-lucide="settings" class="w-4 h-4 mr-2"></i>
-                CMS
-            </button>
         </div>
     </header>
 
-    <!-- KONTEN UTAMA -->
-    <main class="max-w-4xl mx-auto p-4 sm:p-6 pb-20">
+    <!-- MAIN CONTENT -->
+    <main class="p-4 max-w-xl mx-auto">
+
+        <!-- Bagian Hero dan Label -->
+        <section id="beranda" class="text-center bg-white p-6 rounded-xl shadow-lg mb-6 border-b-4 border-pink-500">
+            <h2 class="text-3xl font-bold text-pink-600 mb-2">Wi-Fi Cepat, Hemat, Akurat!</h2>
+            <p class="text-gray-600 text-lg italic">Jelajahi dunia digital tanpa hambatan.</p>
+        </section>
+
+        <!-- PAMFLET / POSTER -->
+        <section id="promosi" class="mb-6">
+            <h3 class="text-2xl font-bold text-pink-700 mb-4 text-center">Promo Spesial Bulan Ini!</h3>
+            <div class="flex justify-center">
+                <!-- Gambar Pamflet Portrait (Ganti URL ini dengan poster asli Anda) -->
+                <img 
+                    src="https://placehold.co/300x450/ff69b4/ffffff?text=PAMFLET+PROMO%0ANETWORKNAVIGATORS" 
+                    alt="Pamflet Promo Wi-Fi" 
+                    class="w-full max-w-xs sm:max-w-sm rounded-lg shadow-xl border-4 border-pink-300 transition duration-300 hover:scale-[1.02]"
+                    onerror="this.onerror=null; this.src='https://placehold.co/300x450/f48fb1/ffffff?text=Poster+Promo';"
+                >
+            </div>
+        </section>
+
+        <!-- LAYANAN DAN HARGA -->
+        <section id="layanan" class="mb-6">
+            <h3 class="text-2xl font-bold text-pink-700 mb-4 text-center">Pilih Akses Wi-Fi Anda</h3>
+            <div class="space-y-4">
+                
+                <!-- Card Layanan 1: 3 Jam -->
+                <div class="layanan-card bg-white p-5 rounded-lg shadow-md border-l-8 border-pink-400 flex flex-col sm:flex-row justify-between items-center">
+                    <div>
+                        <p class="text-xl font-semibold text-gray-800">3 Jam Akses Nonstop</p>
+                        <p class="text-3xl font-extrabold text-pink-600 mt-1">Rp 2.000</p>
+                    </div>
+                    <button 
+                        class="whatsapp-order mt-3 sm:mt-0 w-full sm:w-auto px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full shadow-lg transition duration-300" 
+                        data-jam="3" data-harga="2000" data-produk="3 Jam Akses">
+                        <i class="fab fa-whatsapp mr-2"></i> Pesan Sekarang
+                    </button>
+                </div>
+
+                <!-- Card Layanan 2: 6 Jam -->
+                <div class="layanan-card bg-white p-5 rounded-lg shadow-md border-l-8 border-pink-500 flex flex-col sm:flex-row justify-between items-center">
+                    <div>
+                        <p class="text-xl font-semibold text-gray-800">6 Jam Akses Nonstop</p>
+                        <p class="text-3xl font-extrabold text-pink-600 mt-1">Rp 3.000</p>
+                    </div>
+                    <button 
+                        class="whatsapp-order mt-3 sm:mt-0 w-full sm:w-auto px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full shadow-lg transition duration-300" 
+                        data-jam="6" data-harga="3000" data-produk="6 Jam Akses">
+                        <i class="fab fa-whatsapp mr-2"></i> Pesan Sekarang
+                    </button>
+                </div>
+
+                <!-- Card Layanan 3: 12 Jam -->
+                <div class="layanan-card bg-white p-5 rounded-lg shadow-md border-l-8 border-pink-600 flex flex-col sm:flex-row justify-between items-center">
+                    <div>
+                        <p class="text-xl font-semibold text-gray-800">12 Jam Akses Nonstop</p>
+                        <p class="text-3xl font-extrabold text-pink-600 mt-1">Rp 5.000</p>
+                    </div>
+                    <button 
+                        class="whatsapp-order mt-3 sm:mt-0 w-full sm:w-auto px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-bold rounded-full shadow-lg transition duration-300" 
+                        data-jam="12" data-harga="5000" data-produk="12 Jam Akses">
+                        <i class="fab fa-whatsapp mr-2"></i> Pesan Sekarang
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Pengurus Website -->
+        <section id="tim" class="mb-6">
+            <h3 class="text-2xl font-bold text-pink-700 mb-4 text-center">Tim NetworkNavigators</h3>
+            <p class="text-sm text-center text-gray-500 mb-4">
+                <!-- CATATAN PENTING UNTUK PENGGUNA -->
+                Anda harus menempatkan foto-foto ini di folder lokal bernama <code>images/</code>
+            </p>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                
+                <!-- Anggota 1: Melinda (images/melinda.jpg) -->
+                <div class="pengurus-card text-center p-3 bg-white rounded-xl shadow-md">
+                    <img src="images/melinda.jpg" 
+                         alt="Foto Melinda" 
+                         class="w-20 h-20 rounded-full mx-auto object-cover border-4 border-pink-300"
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/f8bbd0/000?text=Melinda';"
+                    >
+                    <p class="mt-2 text-lg font-semibold text-pink-700">Melinda</p>
+                </div>
+                <!-- Anggota 2: Handini (images/handini.jpg) -->
+                <div class="pengurus-card text-center p-3 bg-white rounded-xl shadow-md">
+                    <img src="images/handini.jpg" 
+                         alt="Foto Handini" 
+                         class="w-20 h-20 rounded-full mx-auto object-cover border-4 border-pink-300"
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/f8bbd0/000?text=Handini';"
+                    >
+                    <p class="mt-2 text-lg font-semibold text-pink-700">Handini</p>
+                </div>
+                <!-- Anggota 3: Ratna (images/ratna.jpg) -->
+                <div class="pengurus-card text-center p-3 bg-white rounded-xl shadow-md">
+                    <img src="images/ratna.jpg" 
+                         alt="Foto Ratna" 
+                         class="w-20 h-20 rounded-full mx-auto object-cover border-4 border-pink-300"
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/f8bbd0/000?text=Ratna';"
+                    >
+                    <p class="mt-2 text-lg font-semibold text-pink-700">Ratna</p>
+                </div>
+                <!-- Anggota 4: Nipah (images/nipah.jpg) -->
+                <div class="pengurus-card text-center p-3 bg-white rounded-xl shadow-md">
+                    <img src="images/nipah.jpg" 
+                         alt="Foto Nipah" 
+                         class="w-20 h-20 rounded-full mx-auto object-cover border-4 border-pink-300"
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/f8bbd0/000?text=Nipah';"
+                    >
+                    <p class="mt-2 text-lg font-semibold text-pink-700">Nipah</p>
+                </div>
+                <!-- Anggota 5: Shalsa (images/shalsa.jpg) -->
+                <div class="pengurus-card text-center p-3 bg-white rounded-xl shadow-md">
+                    <img src="images/shalsa.jpg" 
+                         alt="Foto Shalsa" 
+                         class="w-20 h-20 rounded-full mx-auto object-cover border-4 border-pink-300"
+                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/f8bbd0/000?text=Shalsa';"
+                    >
+                    <p class="mt-2 text-lg font-semibold text-pink-700">Shalsa</p>
+                </div>
+            </div>
+        </section>
         
-        <!-- BAGIAN SAMBUTAN -->
-        <section id="home" class="mb-10 pt-4">
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-primary">
-                <h1 class="text-3xl font-bold text-gray-800 mb-2">Wi-Fi Cepat, Akses Mudah.</h1>
-                <p class="text-gray-600 mb-4">Dapatkan voucher internet terbaik dengan kecepatan stabil dan harga terjangkau. Pesan otomatis via WhatsApp, langsung aktif!</p>
-                <a href="#products" class="inline-block px-6 py-3 bg-accent text-gray-900 font-semibold rounded-lg shadow-md hover:bg-amber-400 transition duration-150">Lihat Layanan Kami</a>
-            </div>
-        </section>
-
-        <!-- BAGIAN PRODUK/LAYANAN -->
-        <section id="products" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-primary pb-2 flex items-center">
-                <i data-lucide="wifi" class="w-6 h-6 mr-2 text-primary"></i>
-                Layanan Voucher Wi-Fi
-            </h2>
-            <div id="product-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Data produk akan diisi oleh JS -->
-            </div>
-        </section>
-
-        <!-- BAGIAN PENGURUS/TIM -->
-        <section id="team" class="mb-12">
-            <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b-2 border-primary pb-2 flex items-center">
-                <i data-lucide="users" class="w-6 h-6 mr-2 text-primary"></i>
-                Anggota Pengurus Kami
-            </h2>
-            <div id="management-list" class="grid grid-cols-2 sm:grid-cols-3 gap-6">
-                <!-- Data pengurus akan diisi oleh JS -->
-            </div>
+        <!-- Catatan CMS dan Spreadsheet (Wajib Ada) -->
+        <section class="bg-yellow-100 p-4 rounded-lg shadow-inner mb-6 text-sm text-gray-700">
+            <h4 class="font-bold text-red-600 mb-2">⚠️ Catatan Penting (CMS & Database)</h4>
+            <p>Sistem CMS dan fitur pencatatan otomatis ke Google Spreadsheet memerlukan layanan *backend* (misalnya menggunakan Google Apps Script atau Firebase Functions) untuk keamanan dan fungsionalitas. Kode ini hanya menyediakan tampilan *frontend* dan *link* WhatsApp otomatis.</p>
         </section>
 
     </main>
 
-    <!-- MODAL (Box Pesan) untuk Konfirmasi Pesanan -->
-    <div id="message-box" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center p-4 z-50">
-        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full transform transition-all duration-300 scale-100">
-            <h3 id="message-title" class="text-xl font-bold text-primary mb-3">Pemesanan Berhasil</h3>
-            <p id="message-content" class="text-gray-700 mb-6">Anda akan diarahkan ke WhatsApp untuk menyelesaikan pemesanan.</p>
-            <button onclick="closeMessageBox()" class="w-full bg-primary text-white py-2 rounded-lg font-semibold hover:bg-secondary transition duration-150">Tutup</button>
-        </div>
-    </div>
-    
-    <!-- MODAL (CMS Sederhana) -->
-    <div id="cms-modal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center p-4 z-50 overflow-y-auto">
-        <div class="bg-white p-6 rounded-xl shadow-2xl max-w-3xl w-full my-8 transform transition-all duration-300">
-            <div class="flex justify-between items-center border-b pb-3 mb-4">
-                <h3 class="text-2xl font-bold text-gray-800">CMS (Sistem Manajemen Konten)</h3>
-                <button onclick="toggleCmsModal()" class="text-gray-500 hover:text-gray-800">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
-
-            <!-- Bagian Produk di CMS -->
-            <div class="mb-6">
-                <h4 class="text-xl font-semibold text-primary mb-3">Daftar Produk</h4>
-                <div class="overflow-x-auto rounded-lg border">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cms-product-body" class="bg-white divide-y divide-gray-200">
-                            <!-- Produk diisi oleh JS -->
-                        </tbody>
-                    </table>
-                </div>
-                <p class="text-sm text-gray-500 mt-2">Catatan: Untuk mengedit/menambah produk secara permanen, Anda harus mengubah variabel `products` di kode JavaScript.</p>
-            </div>
-
-             <!-- Bagian Pengurus di CMS -->
-            <div class="mb-6">
-                <h4 class="text-xl font-semibold text-primary mb-3">Daftar Pengurus</h4>
-                <div class="overflow-x-auto rounded-lg border">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Posisi</th>
-                            </tr>
-                        </thead>
-                        <tbody id="cms-management-body" class="bg-white divide-y divide-gray-200">
-                            <!-- Pengurus diisi oleh JS -->
-                        </tbody>
-                    </table>
-                </div>
-                <p class="text-sm text-gray-500 mt-2">Catatan: Untuk mengedit/menambah pengurus, Anda harus mengubah variabel `management` di kode JavaScript.</p>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- MENU BAR BAWAH (MOBILE FIXED NAV) -->
-    <nav id="mobile-nav" class="bg-white border-t border-gray-200 shadow-2xl block sm:hidden">
-        <div class="flex justify-around items-center h-16">
-            <a href="#home" class="flex flex-col items-center text-primary hover:text-secondary transition duration-150 p-2">
-                <i data-lucide="home" class="w-6 h-6"></i>
-                <span class="text-xs font-medium mt-1">Beranda</span>
-            </a>
-            <a href="#products" class="flex flex-col items-center text-gray-500 hover:text-secondary transition duration-150 p-2">
-                <i data-lucide="package" class="w-6 h-6"></i>
-                <span class="text-xs font-medium mt-1">Layanan</span>
-            </a>
-            <button onclick="toggleCmsModal()" class="flex flex-col items-center text-gray-500 hover:text-secondary transition duration-150 p-2">
-                <i data-lucide="settings" class="w-6 h-6"></i>
-                <span class="text-xs font-medium mt-1">CMS</span>
-            </button>
-            <a href="#team" class="flex flex-col items-center text-gray-500 hover:text-secondary transition duration-150 p-2">
-                <i data-lucide="users" class="w-6 h-6"></i>
-                <span class="text-xs font-medium mt-1">Tim</span>
-            </a>
-        </div>
+    <!-- MENU BAR BAWAH (STATIC UNTUK SMARTPHONE) -->
+    <nav class="bottom-navbar bg-pink-600 flex justify-around items-center">
+        <!-- Beranda -->
+        <a href="#beranda" class="nav-item flex flex-col items-center justify-center text-white w-full">
+            <i class="fas fa-home text-xl"></i>
+            <span class="text-xs mt-1">Beranda</span>
+        </a>
+        <!-- Layanan -->
+        <a href="#layanan" class="nav-item flex flex-col items-center justify-center text-white w-full">
+            <i class="fas fa-wifi text-xl"></i>
+            <span class="text-xs mt-1">Layanan</span>
+        </a>
+        <!-- Tim -->
+        <a href="#tim" class="nav-item flex flex-col items-center justify-center text-white w-full">
+            <i class="fas fa-users text-xl"></i>
+            <span class="text-xs mt-1">Tim</span>
+        </a>
+        <!-- Hubungi (WhatsApp Umum) -->
+        <a href="https://wa.me/6281234567890" target="_blank" class="nav-item flex flex-col items-center justify-center text-white w-full">
+            <i class="fab fa-whatsapp text-xl"></i>
+            <span class="text-xs mt-1">Hubungi</span>
+        </a>
     </nav>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JavaScript untuk Fungsionalitas WhatsApp Order -->
     <script>
-        // Inisialisasi Lucide Icons
         document.addEventListener('DOMContentLoaded', () => {
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-            renderContent();
-            renderCmsContent();
-        });
+            const orderButtons = document.querySelectorAll('.whatsapp-order');
+            // Ganti dengan nomor WhatsApp penerima pesanan Anda (dengan kode negara, tanpa +)
+            const whatsappNumber = '6281234567890'; 
 
-        // ----------------------------------------------------
-        // 1. DATA (Simulasi Database)
-        // ----------------------------------------------------
-        
-        // Data Produk/Layanan Wi-Fi
-        let products = [
-            { id: 1, name: "1 Jam Cepat", duration: "1 Jam", price: "2.000", wa_message: "Saya pesan voucher 1 jam cepat. Mohon infonya." },
-            { id: 2, name: "6 Jam Harian", duration: "6 Jam", price: "5.000", wa_message: "Saya pesan voucher 6 jam harian. Tolong diproses." },
-            { id: 3, name: "24 Jam Full Day", duration: "24 Jam", price: "10.000", wa_message: "Saya pesan voucher 24 jam full day. Terima kasih." },
-            { id: 4, name: "Paket Mingguan", duration: "7 Hari", price: "35.000", wa_message: "Saya pesan paket mingguan. Cek ketersediaan ya." },
-        ];
-
-        // Data Anggota Pengurus
-        const management = [
-            { name: "Bima Santosa", position: "CEO & Founder", photo: "https://placehold.co/100x100/38bdf8/ffffff?text=BS" },
-            { name: "Citra Dewi", position: "Kepala Pemasaran", photo: "https://placehold.co/100x100/10b981/ffffff?text=CD" },
-            { name: "Andi Wijaya", position: "Teknisi Utama", photo: "https://placehold.co/100x100/f59e0b/ffffff?text=AW" },
-        ];
-        
-        // Nomor WhatsApp tujuan pemesanan
-        const WA_NUMBER = "6281234567890"; // Ganti dengan Nomor WhatsApp resmi Anda
-
-        // URL Google Apps Script Anda (Ganti dengan URL yang sudah Anda deploy)
-        // Skrip ini bertindak sebagai perantara untuk mencatat data ke Google Sheets
-        const SPREADSHEET_SCRIPT_URL = "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"; 
-
-        // ----------------------------------------------------
-        // 2. FUNGSI UTAMA (Rendering Konten)
-        // ----------------------------------------------------
-
-        function renderContent() {
-            // Render Produk
-            const productList = document.getElementById('product-list');
-            productList.innerHTML = products.map(product => `
-                <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-300 overflow-hidden border-t-4 border-secondary p-5">
-                    <div class="flex justify-center mb-4">
-                         <i data-lucide="router" class="w-12 h-12 text-secondary"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-1">${product.name}</h3>
-                    <p class="text-sm text-gray-500 mb-3">Akses selama ${product.duration}</p>
-                    <div class="text-3xl font-extrabold text-primary mb-4">Rp ${product.price}</div>
+            orderButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const jam = event.target.getAttribute('data-jam');
+                    const harga = event.target.getAttribute('data-harga');
+                    const produk = event.target.getAttribute('data-produk');
                     
-                    <button onclick="handleOrder(${product.id})" 
-                            class="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-green-700 transition duration-150 flex items-center justify-center shadow-md">
-                        <i data-lucide="zap" class="w-5 h-5 mr-2"></i>
-                        Pesan Otomatis (WA)
-                    </button>
-                </div>
-            `).join('');
-            
-            // Render Pengurus
-            const managementList = document.getElementById('management-list');
-            managementList.innerHTML = management.map(member => `
-                <div class="bg-white p-5 rounded-xl shadow-md flex flex-col items-center text-center">
-                    <img src="${member.photo}" alt="Foto ${member.name}" 
-                         class="w-24 h-24 rounded-full object-cover mb-3 border-4 border-primary/50" 
-                         onerror="this.onerror=null; this.src='https://placehold.co/100x100/6b7280/ffffff?text=${member.name.split(' ').map(n=>n[0]).join('')}'">
-                    <p class="text-lg font-semibold text-gray-800">${member.name}</p>
-                    <p class="text-sm text-secondary font-medium">${member.position}</p>
-                </div>
-            `).join('');
+                    // Format mata uang sederhana (optional)
+                    const formattedHarga = new Intl.NumberFormat('id-ID').format(harga);
 
-            // Re-render Lucide Icons for dynamic content
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-        }
+                    // Teks Pesan WhatsApp Otomatis
+                    const message = `Halo NetworkNavigators, saya ingin memesan:
+\n*Layanan:* ${produk} (${jam} Jam)
+*Harga:* Rp ${formattedHarga}
+\nMohon info cara pembayaran dan langkah aktivasi Wi-Fi. Terima kasih!`;
 
-        // ----------------------------------------------------
-        // 3. FUNGSI PEMESANAN (WhatsApp & Spreadsheet)
-        // ----------------------------------------------------
-
-        async function handleOrder(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-
-            // 1. Buat link WhatsApp
-            const waLink = createWhatsAppLink(product);
-            
-            // 2. Catat Pesanan ke Spreadsheet (Simulasi)
-            const saveResult = await saveOrderToSpreadsheet(product);
-
-            // 3. Tampilkan pesan sukses dan arahkan ke WA
-            if (saveResult.success) {
-                showMessageBox("Pemesanan Berhasil!", `Pesanan ${product.name} telah dicatat. Anda akan diarahkan ke WhatsApp.`);
-                setTimeout(() => {
-                    window.open(waLink, '_blank');
-                    closeMessageBox();
-                }, 1500); // Tunggu 1.5 detik sebelum redirect
-            } else {
-                showMessageBox("Gagal Mencatat!", saveResult.message, "text-red-600");
-                // Tetap berikan opsi WA jika pencatatan gagal
-                setTimeout(() => {
-                    window.open(waLink, '_blank');
-                    closeMessageBox();
-                }, 2500);
-            }
-        }
-
-        function createWhatsAppLink(product) {
-            const message = encodeURIComponent(
-                `Halo NetworkNavigators, saya ingin memesan layanan:\n\n` +
-                `*Produk:* ${product.name} (Rp ${product.price})\n` +
-                `*Pesan:* ${product.wa_message}\n\n` +
-                `Mohon konfirmasi pesanan saya.`
-            );
-            return `https://wa.me/${WA_NUMBER}?text=${message}`;
-        }
-
-        async function saveOrderToSpreadsheet(orderData) {
-            const timestamp = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
-            
-            // Data yang akan dikirim ke Apps Script
-            const data = {
-                timestamp: timestamp,
-                product: orderData.name,
-                price: orderData.price,
-                duration: orderData.duration,
-                message: orderData.wa_message,
-                status: "Menunggu Konfirmasi WA"
-            };
-
-            // PERHATIAN: Ini adalah implementasi placeholder.
-            // Di lingkungan nyata, Anda akan mengirim ini ke Google Apps Script (GAS) 
-            // yang terikat ke Spreadsheet. GAS yang akan menangani koneksi Sheets secara aman.
-            
-            if (SPREADSHEET_SCRIPT_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") {
-                console.warn("MENGGUNAKAN SIMULASI: Harap ganti SPREADSHEET_SCRIPT_URL dengan URL Apps Script Anda.");
-                console.log("Data pesanan yang dicatat:", data);
-                return { success: true, message: "Pencatatan berhasil (SIMULASI). Lanjutkan ke WhatsApp." };
-            }
-
-            try {
-                // Contoh call: fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(data) })
-                const response = await fetch(SPREADSHEET_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data),
-                    mode: 'no-cors' // Penting untuk GAS yang tidak mengembalikan respons JSON standar
+                    // Membuat URL WhatsApp
+                    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+                    
+                    // Buka link WhatsApp
+                    window.open(whatsappURL, '_blank');
+                    
+                    // --- Placeholder untuk Fungsionalitas Spreadsheet ---
+                    console.log(`Pemesanan dicatat ke 'simulasi database' - Produk: ${produk}, Harga: ${harga}`);
+                    // Untuk pencatatan real-time, Anda harus memanggil API/Endpoint 
+                    // yang terhubung ke Google Apps Script di sini.
                 });
-                
-                // Karena 'no-cors', respons tidak dapat diperiksa. Kita asumsikan sukses.
-                return { success: true, message: "Pencatatan pesanan berhasil." };
-
-            } catch (error) {
-                console.error("Gagal mencatat data pesanan:", error);
-                return { success: false, message: "Gagal mencatat pesanan ke database. Coba lagi atau hubungi admin." };
-            }
-        }
-
-
-        // ----------------------------------------------------
-        // 4. FUNGSI UI (Modal dan CMS)
-        // ----------------------------------------------------
-
-        function showMessageBox(title, content, titleClass = "text-primary") {
-            document.getElementById('message-title').textContent = title;
-            document.getElementById('message-title').className = `text-xl font-bold ${titleClass} mb-3`;
-            document.getElementById('message-content').textContent = content;
-            document.getElementById('message-box').classList.remove('hidden');
-            document.getElementById('message-box').classList.add('flex');
-        }
-
-        function closeMessageBox() {
-            document.getElementById('message-box').classList.add('hidden');
-            document.getElementById('message-box').classList.remove('flex');
-        }
-
-        function toggleCmsModal() {
-            const modal = document.getElementById('cms-modal');
-            modal.classList.toggle('hidden');
-            modal.classList.toggle('flex');
-        }
-
-        function renderCmsContent() {
-            // Isi tabel produk CMS
-            const cmsProductBody = document.getElementById('cms-product-body');
-            cmsProductBody.innerHTML = products.map(p => `
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${p.name}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp ${p.price}</td>
-                </tr>
-            `).join('');
-
-            // Isi tabel pengurus CMS
-            const cmsManagementBody = document.getElementById('cms-management-body');
-            cmsManagementBody.innerHTML = management.map(m => `
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${m.name}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${m.position}</td>
-                </tr>
-            `).join('');
-        }
-        
+            });
+        });
     </script>
-    <!-- Template Google Apps Script untuk mencatat data POST/GET ke Spreadsheet (Anda perlu membuat ini sendiri)
-
-    function doPost(e) {
-      const lock = LockService.getScriptLock();
-      lock.waitLock(30000); // Tunggu 30 detik untuk mendapatkan kunci
-
-      try {
-        const doc = SpreadsheetApp.openById("ID_SPREADSHEET_ANDA"); // Ganti ID Spreadsheet Anda
-        const sheet = doc.getSheetByName("Orders"); // Ganti dengan nama sheet yang Anda inginkan (misal: "Orders")
-        
-        // Parsing JSON dari body request POST
-        const data = JSON.parse(e.postData.contents);
-        
-        // Baris data yang akan dicatat
-        const row = [
-          data.timestamp, 
-          data.product, 
-          data.price, 
-          data.duration, 
-          data.message,
-          data.status
-        ];
-        
-        // Tambahkan baris baru ke sheet
-        sheet.appendRow(row);
-        
-        return ContentService.createTextOutput(JSON.stringify({ result: "success", message: "Data added" }))
-          .setMimeType(ContentService.MimeType.JSON);
-          
-      } catch (error) {
-        return ContentService.createTextOutput(JSON.stringify({ result: "error", message: error.toString() }))
-          .setMimeType(ContentService.MimeType.JSON);
-      } finally {
-        lock.releaseLock();
-      }
-    }
-    
-    // Deploy skrip ini sebagai Web App (Executable: Me, Access: Anyone) untuk mendapatkan SPREADSHEET_SCRIPT_URL
-    -->
 </body>
 </html>
+
